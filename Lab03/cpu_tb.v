@@ -10,9 +10,9 @@
 //
 // Clock period = 8 time units (half-period = 4)
 
-`include "cpu.v"
-`include "alu.v"
-`include "reg_file.v"
+// `include "cpu.v"
+// `include "alu.v"
+// `include "reg_file.v"
 
 module cpu_tb;
 
@@ -247,7 +247,7 @@ module cpu_tb;
     initial begin
         $monitor("Time=%0t | CLK=%b RESET=%b | PC=%0d | INSTRUCTION=%b | OPCODE=%b | RD=%0d RT=%0d RS=%0d | ALUOP=%b | WRITEENABLE=%b | ALURESULT=%0d",
                  $time, CLK, RESET, PC, INSTRUCTION, 
-                 mycpu.OPCODE, mycpu.WRITEREG, mycpu.READREG1, mycpu.READREG2,
+                 mycpu.mycontrol.OPCODE, mycpu.WRITEREG, mycpu.READREG1, mycpu.READREG2,
                  mycpu.ALUOP, mycpu.WRITEENABLE, mycpu.ALURESULT);
     end
 
