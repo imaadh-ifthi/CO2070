@@ -1,56 +1,41 @@
-// CO2070 Computer Architecture - Lab 2 Part 2
-// Module: 8x8 Register File
-// 8 registers, each 8 bits wide
-// Two asynchronous read ports, one synchronous write port
-// Synchronous reset clears all registers
+// reg file for lab 2 part 2 (reusing for lab 3)
+// 8x8 register file - 8 regs, 8 bits each
+// 2 async read ports, 1 sync write port
 
 module reg_file (IN, OUT1, OUT2, INADDRESS, OUT1ADDRESS, OUT2ADDRESS, WRITE, CLK, RESET);
 
-    // ============================================================
-    // Port Declarations
-    // ============================================================
-
-    // 8-bit data input for writing into a register
+    // data in port
     input [7:0] IN;
 
-    // 3-bit addresses to select which register to access
-    input [2:0] INADDRESS;    // register to write to (destination)
-    input [2:0] OUT1ADDRESS;  // register to read from for port 1
-    input [2:0] OUT2ADDRESS;  // register to read from for port 2
+    // addresses (3 bits since we have 8 registers)
+    input [2:0] INADDRESS;    // where to write to
+    input [2:0] OUT1ADDRESS;  // read port 1
+    input [2:0] OUT2ADDRESS;  // read port 2
 
-    // Control signals
-    input WRITE;   // enables writing when high
-    input CLK;     // clock signal
-    input RESET;   // clears all registers when high (synchronous)
+    // control stuff
+    input WRITE;   // write enable
+    input CLK;     // clock
+    input RESET;   // clears everything
 
-    // Two 8-bit output ports to read two registers simultaneously
+    // outputs for reading
     output [7:0] OUT1;
     output [7:0] OUT2;
 
-    // ============================================================
-    // Register File Storage
-    // ============================================================
-    // 8 registers, each 8 bits wide
+    // the actual registers array
     reg [7:0] registers [7:0];
 
-    integer i; // loop variable for reset
+    integer i; // for the loop below
 
-    // ============================================================
-    // Asynchronous Read
-    // ============================================================
-    // Outputs update whenever address or register content changes
-    // #2 is the read delay (2 time units)
+    // read ports - async but with #2 delay as per lab manual
     assign #2 OUT1 = registers[OUT1ADDRESS];
     assign #2 OUT2 = registers[OUT2ADDRESS];
 
-    // ============================================================
-    // Synchronous Write and Reset (on positive clock edge)
-    // ============================================================
-    // Reset takes priority over write
+    // write and reset happen on posedge
+    // reset has higher priority obviously
     always @(posedge CLK) begin
 
         if (RESET) begin
-            // Clear all 8 registers to zero
+            // clear em all
             #1;
             for (i = 0; i < 8; i = i + 1) begin
                 registers[i] <= 8'b00000000;
@@ -58,7 +43,7 @@ module reg_file (IN, OUT1, OUT2, INADDRESS, OUT1ADDRESS, OUT2ADDRESS, WRITE, CLK
         end
 
         else if (WRITE) begin
-            // Write IN to the register at INADDRESS after #1 delay
+            // write input to the target register with #1 delay
             #1 registers[INADDRESS] <= IN;
         end
 
