@@ -33,7 +33,7 @@ module cpu_tb;
     // ============================================================
     // Instruction Fetching Logic (Asynchronous)
     // ============================================================
-    // The CPU provides PC as the address; we read 4 bytes starting at PC
+    // The CPU provides PC as the address; we read 4 bytes starting at PCYX
     // to form the 32-bit instruction word.
     // Instruction memory read delay: #2 time units
     assign #2 INSTRUCTION = {instr_mem[PC[31:0]+3], instr_mem[PC[31:0]+2], 
@@ -198,6 +198,14 @@ module cpu_tb;
         // Generate waveform dump file for GTKWave visualization
         $dumpfile("cpu_wavedata.vcd");
         $dumpvars(0, cpu_tb);
+        $dumpvars(0, mycpu.myreg.registers[0]);
+        $dumpvars(0, mycpu.myreg.registers[1]);
+        $dumpvars(0, mycpu.myreg.registers[2]);
+        $dumpvars(0, mycpu.myreg.registers[3]);
+        $dumpvars(0, mycpu.myreg.registers[4]);
+        $dumpvars(0, mycpu.myreg.registers[5]);
+        $dumpvars(0, mycpu.myreg.registers[6]);
+        $dumpvars(0, mycpu.myreg.registers[7]);
         
         // Initialize clock and reset
         CLK = 1'b0;
