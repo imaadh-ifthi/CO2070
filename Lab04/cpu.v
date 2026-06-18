@@ -9,7 +9,6 @@
 //   count offset to a byte offset. This shifted offset is added to PC_NEXT (PC+4)
 //   by a dedicated branch/jump target adder with #2 latency, running in parallel
 //   with the ALU. 
-//   if that makes no sense, don't worry, I don't get it either tbh
 //
 //   For j:   PC_SELECT = 1 unconditionally -> PC = PC+4 + (offset << 2)
 //   For beq: PC_SELECT = (BRANCH & ZERO)   -> PC = PC+4 + (offset << 2) only if equal

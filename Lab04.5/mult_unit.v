@@ -6,7 +6,7 @@
 //   Uses the shift-and-add method (array multiplier).
 //   For each bit of data2, if the bit is 1, we add a shifted copy
 //   of data1 to the result. The "shift" is done using concatenation
-//   (not <<, because that's also banned lol).
+//   (not <<, as those operators  are restricted).
 //
 //   Example: 5 * 7 = 00000101 * 00000111
 //     pp0 = 00000101 (data2[0]=1, shift 0)
@@ -16,7 +16,7 @@
 //     sum  = 00100011 = 35 ✓ nice
 //
 //   Only keeps the lower 8 bits of the 16-bit product.
-//   Overflow? not my problem lmao
+//   Overflow is ignored  for 8-bit results
 //
 // LATENCY: #3 time units (array multiplier is slower than a simple add)
 

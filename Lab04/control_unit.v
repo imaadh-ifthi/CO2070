@@ -1,7 +1,6 @@
 // control unit - decodes instructions and generates control signals
 // this is basically the brain of the cpu
-// LAB 4: upgraded to support j and beq instructions (I hate branch instructions so much)
-// if this doesnt compile im dropping out
+// LAB 4: upgraded to support j and beq instructions
 
 module control_unit(
     input [31:0] INSTRUCTION,
@@ -19,7 +18,6 @@ module control_unit(
 );
 
     // break up the instruction into its fields 
-    // tbh I just guessed the bit numbers here, hope it's right
     wire [7:0] OPCODE;
     wire [7:0] RD_IMM;
     wire [7:0] RT;
@@ -112,14 +110,13 @@ module control_unit(
 
             // =============================================
             // NEW INSTRUCTIONS FOR LAB 4 - FLOW CONTROL
-            // (aka the part that kept me up till 4 am)
             // =============================================
 
             // j (jump) - unconditional jump
             // opcode = 0x06
             // Format: j offset  (offset is in bits[23:16], treated as signed)
             // Jumps to PC_NEXT + (offset * 4), where PC_NEXT = PC + 4
-            // Bits[15:0] are ignored (wasted bits smh)
+            // Bits[15:0] are ignored 
             8'b00000110: begin
                 JUMP         = 1'b1;     // signal the PC to jump
                 BRANCH       = 1'b0;     // not a conditional branch
@@ -143,7 +140,6 @@ module control_unit(
             end
             
             // unknown opcode, dont write anything
-            // just doing this so synthesis doesn't yell at me
             default: begin
                 WRITEENABLE = 1'b0;
             end

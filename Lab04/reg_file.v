@@ -1,6 +1,5 @@
 // register file module
 // originally from lab 2, using it again here 
-// (thank god for reusability)
 // 8 registers each 8 bits wide
 // can read 2 regs at the same time (async) and write 1 (sync)
 

@@ -10,7 +10,7 @@
 //   count offset to a byte offset. This shifted offset is added to PC_NEXT (PC+4)
 //   by a dedicated branch/jump target adder with #2 latency, running in parallel
 //   with the ALU. 
-//   if that makes no sense, don't worry, I don't get it either tbh
+//   This creates the required timing  behvior for the system
 //
 //   For j:   PC_SELECT = 1 unconditionally -> PC = PC+4 + (offset << 2)
 //   For beq: PC_SELECT = (BRANCH & ZERO)   -> PC = PC+4 + (offset << 2) only if equal
@@ -97,7 +97,7 @@ module cpu(PC, INSTRUCTION, CLK, RESET);
     //   - For bne: BRANCH_NEQ = 1 and ZERO must be 0 for the branch to be taken
     //   - For all other instructions: PC_SELECT = 0 (sequential)
     //   I spent way too long trying to figure out this one line
-    //   UPDATE: now it's even longer with bne lol
+    //   UPDATE: The logic is extended to support bne instrction
     // -------------------------------------------------------
     assign PC_SELECT = JUMP | (BRANCH & ZERO) | (BRANCH_NEQ & ~ZERO);
 

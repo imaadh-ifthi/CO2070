@@ -1,7 +1,6 @@
 // testbench for the cpu - lab 4
 // tests all 8 instructions: loadi, mov, add, sub, and, or, j, beq
 // clock period = 8 time units (toggle every 4)
-// plz work plz work plz work
 //
 // TIMING ANALYSIS:
 //   The beq instruction has the longest critical path:
@@ -17,7 +16,6 @@
 //   Phase 4: beq not-taken test (no branch when registers differ)
 //   Phase 5: Another jump forward test
 //   Phase 6: Backward loop using beq + j (decrement counter from 3 to 0)
-//   if phase 6 works I am buying myself a pizza
 
 `include "cpu.v"
 `include "alu.v"
@@ -51,7 +49,6 @@ module cpu_tb;
     initial begin
         // ============================================================
         // LOAD THE TEST PROGRAM INTO INSTRUCTION MEMORY
-        // writing machine code by hand should be illegal
         // ============================================================
 
         // ---------------------------------------------------------
@@ -84,7 +81,6 @@ module cpu_tb;
         {instr_mem[10'd23], instr_mem[10'd22], instr_mem[10'd21], instr_mem[10'd20]}  = 32'b00000000_00000100_00000000_10101010;
 
         // PC=24: loadi r5, 0xBB   -> SHOULD ALSO BE SKIPPED by jump
-        // writing these 1s and 0s makes my eyes bleed
         {instr_mem[10'd27], instr_mem[10'd26], instr_mem[10'd25], instr_mem[10'd24]}  = 32'b00000000_00000101_00000000_10111011;
 
         // PC=28: loadi r4, 0x11   -> SHOULD EXECUTE (jump lands here)
@@ -227,7 +223,7 @@ module cpu_tb;
         
         // let it run long enough for all phases including the loop
         // ~30 instruction cycles at 10 time units each = 300, giving extra margin
-        // putting 700 just to be safe lol
+        // putting 700 just to be safe 
         #700;
 
         // print final register values for verification

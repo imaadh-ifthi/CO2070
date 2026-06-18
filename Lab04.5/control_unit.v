@@ -22,7 +22,7 @@ module control_unit(
 );
 
     // break up the instruction into its fields 
-    // tbh I just guessed the bit numbers here, hope it's right
+    // Extracted the bit fields   based on instruction format
     wire [7:0] OPCODE;
     wire [7:0] RD_IMM;
     wire [7:0] RT;
@@ -61,7 +61,7 @@ module control_unit(
         
         case (OPCODE)
             // loadi - load immediate value into register
-            // opcode = 0x00 (free marks tbh)
+            // opcode = 0x00 for loadi operation
             8'b00000000: begin
                 ALUOP        = 3'b000;   // forward thru alu
                 MUX_IMM_SEL  = 1'b1;     // use immediate value
@@ -206,7 +206,7 @@ module control_unit(
             // opcode = 0x0C
             // Format: ror rd, rt, imm
             // bits that fall off the right end come back on the left
-            // kinda like a circular conveyor belt for bits lol
+            // Shifts bits in a circular  manner from LSB to MSB
             8'b00001100: begin
                 ALUOP        = 3'b100;   // select shift unit
                 SHIFT_MODE   = 2'b11;    // ROR mode

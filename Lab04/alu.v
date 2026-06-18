@@ -1,29 +1,26 @@
-
-// ok alu for the cpu lab 4. praying this works 
+// ok alu for the cpu lab 4. 
 // (upgraded from lab 3 finally)
 // handles forward, add, and, or operations
 // NEW: added ZERO output flag for beq support cuz why not
 
 // forward unit - literally just passes data2 through lmao
-// used for mov and loadi. feels kinda redundant but whatever
+// used for mov and loadi.
 module forward_unit(input [7:0] data2, output reg [7:0] out);
     always @(*) #1 out = data2; // 1 unit delay
 endmodule
 
 // adder - takes 2 time units cos addition is slower ugh
 // also handles subtraction since we do 2s complement before this
-// (pls dont ask me how 2s comp works I just copied it from lab 2)
 module add_unit(input [7:0] data1, input [7:0] data2, output reg [7:0] out);
     always @(*) #2 out = data1 + data2;
 endmodule
 
 // AND gate, 1 time unit delay
-// simple enough even I can't mess this up
 module and_unit(input [7:0] data1, input [7:0] data2, output reg [7:0] out);
     always @(*) #1 out = data1 & data2;
 endmodule
 
-// OR - same as and but OR lol
+// OR - same as and but OR 
 module or_unit(input [7:0] data1, input [7:0] data2, output reg [7:0] out);
     always @(*) #1 out = data1 | data2;
 endmodule
@@ -31,13 +28,12 @@ endmodule
 
 // the actual ALU module that ties everything together finally
 // select signal picks which operation result we want
-// 000 = forward, 001 = add, 010 = and, 011 = or (hope I memorized this right for the viva)
 //
 // ZERO output: asserted (1) when the add_unit output is zero.
 // used by the beq instruction. For beq, the control unit
 // sets up a subtract so if the two
 // register values are equal, the add result will be zero and
-// ZERO will be high. took me 3 hours to debug this part smh
+// ZERO will be high. 
 module alu (DATA1, DATA2, RESULT, SELECT, ZERO);
     input [7:0] DATA1, DATA2;   // two 8 bit inputs
     input [2:0] SELECT;          // operation selector
@@ -55,7 +51,7 @@ module alu (DATA1, DATA2, RESULT, SELECT, ZERO);
 
     // ZERO flag: high when the adder output is all zeros
     // We check the adder output specifically because beq uses
-    // subtract. if it's 0 they are equal. big brain moment.
+    // subtract. if it's 0 they are equal. 
     assign ZERO = (add_out == 8'b00000000) ? 1'b1 : 1'b0;
 
     // mux - picks the right result

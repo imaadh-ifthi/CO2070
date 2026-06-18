@@ -5,7 +5,7 @@
 // NEW: also handles shift/rotate (sll, srl, sra, ror) and multiply (mult)
 // ZERO output flag for beq/bne support
 
-// forward unit - literally just passes data2 through lmao
+// forward unit -  passes data2 through  directly without chagnes
 // used for mov and loadi. feels kinda redundant but whatever
 module forward_unit(input [7:0] data2, output reg [7:0] out);
     always @(*) #1 out = data2; // 1 unit delay
@@ -24,7 +24,7 @@ module and_unit(input [7:0] data1, input [7:0] data2, output reg [7:0] out);
     always @(*) #1 out = data1 & data2;
 endmodule
 
-// OR - same as and but OR lol
+    // OR - similar to the and unit but perfroms bitwise OR
 module or_unit(input [7:0] data1, input [7:0] data2, output reg [7:0] out);
     always @(*) #1 out = data1 | data2;
 endmodule

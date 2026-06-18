@@ -14,7 +14,7 @@
 //   10 = SRA (arithmetic shift right) - fill with sign bit from left
 //   11 = ROR (rotate right) - wrap bits around
 //
-// LATENCY: #2 time units (3 mux layers is pretty fast tbh)
+// LATENCY: #2 time units (3 mux layrs  execute within limits)
 //
 // only uses lower 3 bits of shift amount (0-7 positions)
 // if you try to shift by more than 7... well, it wraps. deal with it
