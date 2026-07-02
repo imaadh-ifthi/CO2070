@@ -41,6 +41,7 @@
 `include "twos_complement.v"
 `include "mult_unit.v"
 `include "shift_unit.v"
+`include "data_memory.v"
 
 module cpu_tb;
 
@@ -324,8 +325,24 @@ module cpu_tb;
         {instr_mem[10'd183], instr_mem[10'd182], instr_mem[10'd181], instr_mem[10'd180]} = 32'b00001110_00000010_00000000_00000000;
     end
 
+    // memory interface wires
+    wire MEM_READ, MEM_WRITE, BUSYWAIT;
+    wire [7:0] MEM_ADDRESS, MEM_WRITEDATA, MEM_READDATA;
+
     // instantiate the cpu
-    cpu mycpu(PC, INSTRUCTION, CLK, RESET);
+    cpu mycpu(PC, INSTRUCTION, CLK, RESET, MEM_READ, MEM_WRITE, MEM_ADDRESS, MEM_WRITEDATA, MEM_READDATA, BUSYWAIT);
+
+    // instantiate the data memory
+    data_memory mymem(
+        .clock(CLK),
+        .reset(RESET),
+        .read(MEM_READ),
+        .write(MEM_WRITE),
+        .address(MEM_ADDRESS),
+        .writedata(MEM_WRITEDATA),
+        .readdata(MEM_READDATA),
+        .busywait(BUSYWAIT)
+    );
 
     // simulation setup
     initial begin

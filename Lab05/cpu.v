@@ -24,13 +24,21 @@
 //   - BRANCH_NEQ: new branch signal for bne (branch if not equal)
 //     PC_SELECT logic updated to handle both beq and bne
 
-module cpu(PC, INSTRUCTION, CLK, RESET);
+module cpu(PC, INSTRUCTION, CLK, RESET, MEM_READ, MEM_WRITE, MEM_ADDRESS, MEM_WRITEDATA, MEM_READDATA, BUSYWAIT);
 
     // ports
     output wire [31:0] PC;       // program counter output
     input [31:0] INSTRUCTION;    // instruction from memory
     input CLK;
     input RESET;
+    
+    // NEW: Memory interface ports
+    output wire MEM_READ;
+    output wire MEM_WRITE;
+    output wire [7:0] MEM_ADDRESS;
+    output wire [7:0] MEM_WRITEDATA;
+    input [7:0] MEM_READDATA;
+    input BUSYWAIT;
 
     // -------------------------------------------------------
     // Control signals from the control unit
@@ -67,9 +75,15 @@ module cpu(PC, INSTRUCTION, CLK, RESET);
     wire [7:0] MUX_COMP_RESULT;  // after complement mux
     wire [7:0] MUX_IMM_RESULT;   // after immediate mux, goes into alu
 
-    wire [7:0] MEM_READDATA;     // data read from memory
     wire [7:0] REG_IN_DATA;      // final data to write to register file
-    wire BUSYWAIT;               // stall signal from memory
+
+    // -------------------------------------------------------
+    // Memory Interface Assignments
+    // -------------------------------------------------------
+    assign MEM_READ = READ_MEM;
+    assign MEM_WRITE = WRITE_MEM;
+    assign MEM_ADDRESS = ALURESULT;
+    assign MEM_WRITEDATA = REGOUT1;
 
     // -------------------------------------------------------
     // Branch/Jump target calculation wires
@@ -192,20 +206,6 @@ module cpu(PC, INSTRUCTION, CLK, RESET);
         .SELECT(ALUOP),
         .ZERO(ZERO),
         .SHIFT_MODE(SHIFT_MODE)              // NEW: shift mode passthrough
-    );
-
-    // -------------------------------------------------------
-    // Data Memory - Lab 5
-    // -------------------------------------------------------
-    data_memory mymem(
-        .clock(CLK),
-        .reset(RESET),
-        .read(READ_MEM),
-        .write(WRITE_MEM),
-        .address(ALURESULT),       // ALU computes the address
-        .writedata(REGOUT1),       // RT holds the data to write
-        .readdata(MEM_READDATA),
-        .busywait(BUSYWAIT)
     );
 
     // -------------------------------------------------------
