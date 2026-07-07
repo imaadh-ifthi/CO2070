@@ -1,0 +1,45 @@
+[*]
+[*] GTKWave Analyzer v3.3.100 (w)1999-2019 BSI
+[*] Tue Jul 07 16:08:49 2026
+[*]
+[dumpfile] "D:\OneDrive\Semester 4\CO2070 Computer Architecture\CO2070\Lab05\cpu_wavedata.vcd"
+[dumpfile_mtime] "Tue Jul 07 14:55:53 2026"
+[dumpfile_size] 81068
+[savefile] "D:\OneDrive\Semester 4\CO2070 Computer Architecture\CO2070\Lab05\test2.gtkw"
+[timestart] 464
+[size] 1536 793
+[pos] -61 -61
+*-4.000000 484 484 524 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1
+[markername] Alwd start
+[markername] Blwd start
+[treeopen] cpu_tb.
+[treeopen] cpu_tb.mycpu.
+[sst_width] 211
+[signals_width] 286
+[sst_expanded] 1
+[sst_vpaned_height] 320
+@28
+cpu_tb.CLK
+@24
+cpu_tb.PC[31:0]
+@22
+cpu_tb.INSTRUCTION[31:0]
+@28
+cpu_tb.BUSYWAIT
+cpu_tb.MEM_READ
+cpu_tb.MEM_WRITE
+@24
+cpu_tb.MEM_ADDRESS[7:0]
+cpu_tb.MEM_READDATA[7:0]
+cpu_tb.MEM_WRITEDATA[7:0]
+@28
+cpu_tb.mycpu.mycontrol.MUX_MEM_SEL
+cpu_tb.mycpu.REG_WRITE_ENABLE
+@24
+cpu_tb.mycpu.myreg.\registers[0][7:0]
+cpu_tb.mycpu.myreg.\registers[1][7:0]
+cpu_tb.mycpu.myreg.\registers[2][7:0]
+cpu_tb.mycpu.myreg.\registers[6][7:0]
+cpu_tb.mycpu.myreg.\registers[7][7:0]
+[pattern_trace] 1
+[pattern_trace] 0
