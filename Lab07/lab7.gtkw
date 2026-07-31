@@ -1,0 +1,38 @@
+[*]
+[*] GTKWave Analyzer v3.3.100 (w)1999-2019 BSI
+[*] Fri Jul 31 20:02:48 2026
+[*]
+[dumpfile] "D:\OneDrive\Semester 4\CO2070 Computer Architecture\CO2070\Lab07\cpu_wavedata.vcd"
+[dumpfile_mtime] "Fri Jul 31 19:43:33 2026"
+[dumpfile_size] 106589
+[savefile] "D:\OneDrive\Semester 4\CO2070 Computer Architecture\CO2070\Lab07\lab7.gtkw"
+[timestart] 2253100
+[size] 1536 793
+[pos] -1 -1
+*-15.000000 2333300 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1
+[treeopen] cpu_tb.
+[treeopen] cpu_tb.mycpu.
+[sst_width] 211
+[signals_width] 269
+[sst_expanded] 1
+[sst_vpaned_height] 222
+@28
+cpu_tb.CLK
+@22
+cpu_tb.PC[31:0]
+cpu_tb.INSTRUCTION[31:0]
+@28
+cpu_tb.RESET
+cpu_tb.CPU_BUSYWAIT
+[color] 3
+cpu_tb.my_icache.hit
+[color] 3
+cpu_tb.my_icache.busywait
+[color] 3
+cpu_tb.my_icache.state
+cpu_tb.my_dcache.hit
+cpu_tb.my_dcache.busywait
+@23
+cpu_tb.mycpu.myreg.\registers[0][7:0]
+[pattern_trace] 1
+[pattern_trace] 0
